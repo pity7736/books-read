@@ -1,7 +1,9 @@
 
 class AuthorModel:
+    id = None
     first_name = ''
     last_name = ''
+    _intances = {}
 
     def __init__(self, **kwargs):
         self.first_name = kwargs.get('first_name')
@@ -11,4 +13,5 @@ class AuthorModel:
         if not self.first_name or not self.last_name:
             raise ValueError('first_name is obligatory')
 
-        return None
+        self.id = len(self._intances) + 1
+        self._intances[str(self.id)] = self
