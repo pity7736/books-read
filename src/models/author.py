@@ -15,3 +15,18 @@ class AuthorModel:
 
         self.id = len(self._intances) + 1
         self._intances[str(self.id)] = self
+
+    @classmethod
+    def get(cls, id):
+        author = cls._intances[str(id)]
+        print(author.__dict__)
+        return author
+
+    @classmethod
+    def filter_by_first_name(cls, name):
+        authors = list()
+        for author in cls._intances.values():
+            if author.first_name == name:
+                authors.append(author)
+
+        return authors
