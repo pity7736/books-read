@@ -17,6 +17,21 @@ class AuthorModel:
         self._intances[str(self.id)] = self
 
     @classmethod
+    def create(cls, **kwargs):
+        author = cls(**kwargs)
+        author.save()
+        return author
+
+    @classmethod
+    def bulk_create(cls, bulk):
+        authors = []
+        for data in bulk:
+            author = cls.create(**data)
+            authors.append(author)
+
+        return authors
+
+    @classmethod
     def get(cls, id):
         author = cls._intances[str(id)]
         return author
