@@ -3,73 +3,32 @@ import unittest
 from src.models.author import AuthorModel
 
 
-class AuthorModelTest(unittest.TestCase):
+class CreateAuthorModelTest(unittest.TestCase):
 
-    def setUp(self):
-        self.author = AuthorModel()
+    def test_create_author_with_all_data(self):
+        author = AuthorModel()
+        author.first_name = 'name'
+        author.last_name = 'name2'
+        self.assertIsNone(author.save())
 
-    def test_add_author_with_all_data(self):
-        self.author.first_name = 'julián'
-        self.author.last_name = 'cortés'
+    def test_create_author_with_all_data_in_arguments(self):
+        author = AuthorModel(first_name='first_name1', last_name='last_name1')
+        self.assertIsNone(author.save())
 
-        self.assertIsNone(self.author.save())
-
-    def test_add_two_author(self):
-        author1 = AuthorModel()
-        author1.first_name = 'ernesto'
-        author1.last_name = 'vergel'
-        author2 = AuthorModel()
-        author2.first_name = 'julián'
-        author2.last_name = 'cortés'
-        author2.save()
-        self.assertIsNone(author1.save())
-        self.assertIsNone(author2.save())
-
-    def test_add_author_without_first_name(self):
-        self.author.last_name = 'cortés'
+    def test_create_author_without_first_name(self):
+        author = AuthorModel()
+        author.last_name = 'name'
         try:
-            self.author.save()
+            author.save()
             self.fail('this should fail')
         except ValueError:
             pass
 
-    def test_add_author_without_last_name(self):
-        self.author.first_name = 'julián'
+    def test_create_author_without_last_name(self):
+        author = AuthorModel()
+        author.first_name = 'name'
         try:
-            self.author.save()
+            author.save()
             self.fail('this should fail')
         except ValueError:
             pass
-
-    def test_get_author_by_id(self):
-        self.author.first_name = 'nombre'
-        self.author.last_name = 'apellido'
-        self.author.save()
-
-        author = AuthorModel.get(id=5)
-
-        self.assertEqual(author.first_name, 'nombre')
-        self.assertEqual(author.last_name, 'apellido')
-        self.assertEqual(author.id, 5)
-
-    def test_get_author_by_wrong_id(self):
-        try:
-            AuthorModel.get(id=10)
-            self.fail('this should fail')
-        except KeyError:
-            pass
-
-    def test_get_authors_by_first_name(self):
-        author1 = AuthorModel()
-        author1.first_name = 'julián'
-        author1.last_name = 'vergel'
-        author1.save()
-        author2 = AuthorModel()
-        author2.first_name = 'julián'
-        author2.last_name = 'cortés'
-        author2.save()
-
-        authors = AuthorModel.filter_by_first_name('julián')
-
-        self.assertEqual(authors[0].first_name, 'julián')
-        self.assertEqual(authors[1].first_name, 'julián')
