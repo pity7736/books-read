@@ -1,6 +1,6 @@
 import unittest
 
-from src.models.create_author import AuthorModel
+from src.models.author import AuthorModel
 
 
 class CreateAuthorModelTest(unittest.TestCase):
