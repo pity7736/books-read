@@ -13,19 +13,17 @@ class AuthorModelTest(unittest.TestCase):
         self.author.last_name = 'cortés'
 
         self.assertIsNone(self.author.save())
-        self.assertEqual(self.author.id, 1)
 
     def test_add_two_author(self):
         author1 = AuthorModel()
         author1.first_name = 'ernesto'
         author1.last_name = 'vergel'
-        author1.save()
         author2 = AuthorModel()
         author2.first_name = 'julián'
         author2.last_name = 'cortés'
         author2.save()
-        self.assertEqual(author1.id, 2)
-        self.assertEqual(author2.id, 3)
+        self.assertIsNone(author1.save())
+        self.assertIsNone(author2.save())
 
     def test_add_author_without_first_name(self):
         self.author.last_name = 'cortés'
@@ -48,11 +46,11 @@ class AuthorModelTest(unittest.TestCase):
         self.author.last_name = 'apellido'
         self.author.save()
 
-        author = AuthorModel.get(id=4)
+        author = AuthorModel.get(id=5)
 
         self.assertEqual(author.first_name, 'nombre')
         self.assertEqual(author.last_name, 'apellido')
-        self.assertEqual(author.id, 4)
+        self.assertEqual(author.id, 5)
 
     def test_get_author_by_wrong_id(self):
         try:
@@ -75,7 +73,3 @@ class AuthorModelTest(unittest.TestCase):
 
         self.assertEqual(authors[0].first_name, 'julián')
         self.assertEqual(authors[1].first_name, 'julián')
-
-if __name__ == '__main__':
-    print('hola')
-    unittest.main()

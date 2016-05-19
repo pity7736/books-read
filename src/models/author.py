@@ -19,7 +19,6 @@ class AuthorModel:
     @classmethod
     def get(cls, id):
         author = cls._intances[str(id)]
-        print(author.__dict__)
         return author
 
     @classmethod
