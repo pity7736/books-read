@@ -11,7 +11,7 @@ class AuthorModel:
 
     def save(self):
         if not self.first_name or not self.last_name:
-            raise ValueError('first_name is obligatory')
+            raise ValueError('first_name and last_name is obligatory')
 
         self.id = len(self._intances) + 1
         self._intances[str(self.id)] = self
@@ -26,6 +26,15 @@ class AuthorModel:
         authors = list()
         for author in cls._intances.values():
             if author.first_name == name:
+                authors.append(author)
+
+        return authors
+
+    @classmethod
+    def filter_by_last_name(cls, name):
+        authors = list()
+        for author in cls._intances.values():
+            if author.last_name == name:
                 authors.append(author)
 
         return authors
