@@ -32,8 +32,8 @@ class AuthorModel:
         return authors
 
     @classmethod
-    def get(cls, id):
-        author = cls._intances[str(id)]
+    def get(cls, author_id):
+        author = cls._intances[str(author_id)]
         return author
 
     @classmethod
