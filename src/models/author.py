@@ -1,9 +1,7 @@
+from .base import Author
 
-class AuthorModel:
-    id = None
-    first_name = ''
-    last_name = ''
-    _intances = {}
+
+class AuthorModel(Author):
 
     def __init__(self, **kwargs):
         self.first_name = kwargs.get('first_name')

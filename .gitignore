@@ -6,3 +6,6 @@ src/__pycache__/
 src/models/__pycache__/
 tests/__pycache__/
 tests/models/__pycache__/
+
+# local settings
+src/local_settings.py
