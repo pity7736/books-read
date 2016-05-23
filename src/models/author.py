@@ -2,19 +2,23 @@ from .base import Author, Session
 
 
 class AuthorModel(Author):
+    session = Session()
 
     def __init__(self, **kwargs):
-        self.session = Session()
         self.first_name = kwargs.get('first_name')
         self.last_name = kwargs.get('last_name')
 
-    def save(self):
+    @classmethod
+    def _commit(cls):
         try:
-            self.session.add(self)
-            self.session.commit()
+            cls.session.commit()
         except:
-            self.session.rollback()
+            cls.session.rollback()
             raise
+
+    def save(self):
+        self.session.add(self)
+        self._commit()
 
     @classmethod
     def create(cls, **kwargs):
@@ -24,13 +28,8 @@ class AuthorModel(Author):
 
     @classmethod
     def bulk_create(cls, bulk):
-        author = cls()
-        author.session.add_all(bulk)
-        try:
-            author.session.commit()
-        except:
-            author.session.rollback()
-            raise
+        cls.session.add_all(bulk)
+        cls._commit()
 
     @classmethod
     def get(cls, author_id):
