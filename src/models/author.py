@@ -1,18 +1,20 @@
-from .base import Author
+from .base import Author, Session
 
 
 class AuthorModel(Author):
 
     def __init__(self, **kwargs):
+        self.session = Session()
         self.first_name = kwargs.get('first_name')
         self.last_name = kwargs.get('last_name')
 
     def save(self):
-        if not self.first_name or not self.last_name:
-            raise ValueError('first_name and last_name is obligatory')
-
-        self.id = len(self._intances) + 1
-        self._intances[str(self.id)] = self
+        try:
+            self.session.add(self)
+            self.session.commit()
+        except:
+            self.session.rollback()
+            raise
 
     @classmethod
     def create(cls, **kwargs):
@@ -22,12 +24,13 @@ class AuthorModel(Author):
 
     @classmethod
     def bulk_create(cls, bulk):
-        authors = []
-        for data in bulk:
-            author = cls.create(**data)
-            authors.append(author)
-
-        return authors
+        author = cls()
+        author.session.add_all(bulk)
+        try:
+            author.session.commit()
+        except:
+            author.session.rollback()
+            raise
 
     @classmethod
     def get(cls, author_id):
