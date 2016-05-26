@@ -32,8 +32,8 @@ class AuthorModel(Author):
         cls._commit()
 
     @classmethod
-    def get(cls, author_id):
-        author = cls._intances[str(author_id)]
+    def get(cls, id):
+        author = cls.session.query(cls).filter_by(id=id).first()
         return author
 
     @classmethod
