@@ -1,5 +1,7 @@
 import unittest
 
+from sqlalchemy.exc import InvalidRequestError
+
 from src.models.author import AuthorModel
 from src.models.base import engine, Base
 
@@ -24,30 +26,62 @@ class LookupAuthorTests(unittest.TestCase):
         self.assertEqual(author.id, 1)
         self.assertEqual(author.first_name, 'first_name1')
         self.assertEqual(author.last_name, 'last_name1')
-    #
-    # def test_filter_by_first_name(self):
-    #     authors = AuthorModel.filter_by_first_name('first_name2')
-    #
-    #     self.assertEqual(len(authors), 2)
-    #     self.assertEqual(authors[0].first_name, 'first_name2')
-    #     self.assertEqual(authors[1].first_name, 'first_name2')
-    #
-    # def test_filter_by_wrong_first_name(self):
-    #     authors = AuthorModel.filter_by_first_name('test')
-    #
-    #     self.assertEqual(len(authors), 0)
-    #
-    # def test_filter_by_last_name(self):
-    #     authors = AuthorModel.filter_by_last_name('last_name4')
-    #
-    #     self.assertEqual(len(authors), 2)
-    #     self.assertEqual(authors[0].last_name, 'last_name4')
-    #     self.assertEqual(authors[1].last_name, 'last_name4')
-    #
-    # def test_filter_by_wrong_last_name(self):
-    #     authors = AuthorModel.filter_by_last_name('test')
-    #
-    #     self.assertEqual(len(authors), 0)
+
+    def test_get_by_not_exists_id(self):
+        author = AuthorModel.get(id=10)
+        self.assertIsNone(author)
+
+    def test_get_by_first_name(self):
+        author = AuthorModel.get(first_name='first_name1')
+
+        self.assertEqual(author.id, 1)
+        self.assertEqual(author.first_name, 'first_name1')
+        self.assertEqual(author.last_name, 'last_name1')
+
+    def test_get_by_last_name(self):
+        author = AuthorModel.get(last_name='last_name1')
+
+        self.assertEqual(author.id, 1)
+        self.assertEqual(author.first_name, 'first_name1')
+        self.assertEqual(author.last_name, 'last_name1')
+
+    def test_get_by_wrong_param(self):
+        try:
+            AuthorModel.get(param_fail='test')
+            self.fail('this should fail')
+        except InvalidRequestError:
+            pass
+
+    def test_filter_by_first_name(self):
+        authors = AuthorModel.filter(first_name='first_name2')
+
+        self.assertEqual(authors.count(), 2)
+        self.assertEqual(authors[0].first_name, 'first_name2')
+        self.assertEqual(authors[1].first_name, 'first_name2')
+
+    def test_filter_by_wrong_first_name(self):
+        authors = AuthorModel.filter(first_name='test')
+
+        self.assertEqual(authors.count(), 0)
+
+    def test_filter_by_last_name(self):
+        authors = AuthorModel.filter(last_name='last_name4')
+
+        self.assertEqual(authors.count(), 2)
+        self.assertEqual(authors[0].last_name, 'last_name4')
+        self.assertEqual(authors[1].last_name, 'last_name4')
+
+    def test_filter_by_wrong_last_name(self):
+        authors = AuthorModel.filter(last_name='test')
+
+        self.assertEqual(authors.count(), 0)
+
+    def test_filter_by_wrong_param(self):
+        try:
+            AuthorModel.filter(param_fail='test')
+            self.fail('this should fail')
+        except InvalidRequestError:
+            pass
 
     def tearDown(self):
         AuthorModel.session.close_all()

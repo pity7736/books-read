@@ -32,24 +32,11 @@ class AuthorModel(Author):
         cls._commit()
 
     @classmethod
-    def get(cls, id):
-        author = cls.session.query(cls).filter_by(id=id).first()
+    def get(cls, **kwargs):
+        author = cls.session.query(cls).filter_by(**kwargs).first()
         return author
 
     @classmethod
-    def filter_by_first_name(cls, name):
-        authors = list()
-        for author in cls._intances.values():
-            if author.first_name == name:
-                authors.append(author)
-
-        return authors
-
-    @classmethod
-    def filter_by_last_name(cls, name):
-        authors = list()
-        for author in cls._intances.values():
-            if author.last_name == name:
-                authors.append(author)
-
+    def filter(cls, **kwargs):
+        authors = cls.session.query(cls).filter_by(**kwargs)
         return authors
