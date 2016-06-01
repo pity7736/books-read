@@ -3,4 +3,10 @@ from .model import Model
 
 
 class BookModel(Book, Model):
-    pass
+
+    def __repr__(self):
+        _repr = '<Book: {0}>'.format(self.title)
+        if self.id:
+            _repr = '<Book: {0} - {1}>'.format(self.id, self.title)
+
+        return _repr
