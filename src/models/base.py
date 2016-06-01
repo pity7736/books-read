@@ -42,10 +42,12 @@ class Topic(TimestampMixin, Base):
 class Book(TimestampMixin, Base):
     __tablename__ = 'book'
     title = Column(String(300), index=True, unique=True, nullable=False)
-    publication_date = Column(Date, nullable=False)
+    publication_date = Column(Integer, nullable=False)
     read_date = Column(Date, nullable=True)
     topic_id = Column(Integer, ForeignKey('topic.id'), nullable=False)
-    topic = relationship('Topic')
+    topic = relationship('Topic', enable_typechecks=False)
+    authors = relationship('Author', secondary=books_authors,
+                           enable_typechecks=False)
 
 
 class Author(TimestampMixin, Base):
