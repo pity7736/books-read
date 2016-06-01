@@ -3,9 +3,14 @@ import unittest
 from sqlalchemy.exc import IntegrityError
 
 from src.models.author import AuthorModel
+from src.models.base import Base, engine
 
 
 class CreateAuthorModelTest(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        Base.metadata.create_all(engine)
 
     def test_save_author_with_all_data(self):
         author = AuthorModel()
@@ -67,3 +72,8 @@ class CreateAuthorModelTest(unittest.TestCase):
         authors = AuthorModel.bulk_create(bulk)
 
         self.assertIsNone(authors)
+
+    @classmethod
+    def tearDownClass(cls):
+        AuthorModel.session.close_all()
+        Base.metadata.drop_all(engine)

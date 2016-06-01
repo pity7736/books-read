@@ -43,6 +43,7 @@ class Book(TimestampMixin, Base):
     __tablename__ = 'book'
     title = Column(String(300), index=True, unique=True, nullable=False)
     publication_date = Column(Date, nullable=False)
+    read_date = Column(Date, nullable=True)
     topic_id = Column(Integer, ForeignKey('topic.id'), nullable=False)
     topic = relationship('Topic')
 

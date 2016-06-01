@@ -3,12 +3,13 @@ import unittest
 from sqlalchemy.exc import InvalidRequestError
 
 from src.models.author import AuthorModel
-from src.models.base import engine, Base
+from src.models.base import Base, engine
 
 
 class LookupAuthorTests(unittest.TestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
         Base.metadata.create_all(engine)
         bulk = (
             AuthorModel(first_name='first_name1', last_name='last_name1'),
@@ -83,6 +84,7 @@ class LookupAuthorTests(unittest.TestCase):
         except InvalidRequestError:
             pass
 
-    def tearDown(self):
+    @classmethod
+    def tearDownClass(cls):
         AuthorModel.session.close_all()
         Base.metadata.drop_all(engine)
