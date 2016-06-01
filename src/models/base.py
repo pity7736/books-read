@@ -36,7 +36,7 @@ class TimestampMixin:
 
 class Topic(TimestampMixin, Base):
     __tablename__ = 'topic'
-    topic = Column(String(100), nullable=False, unique=True, index=True)
+    name = Column(String(100), nullable=False, unique=True, index=True)
 
 
 class Book(TimestampMixin, Base):
