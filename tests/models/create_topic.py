@@ -6,7 +6,7 @@ from src.models.base import Base, engine
 from src.models.topic import TopicModel
 
 
-class CreateTopicTests(unittest.TestCase):
+class CreateTopicModelTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
