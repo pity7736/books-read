@@ -8,7 +8,7 @@ from src.controllers import CreateTopicController
 class CreateTopicControllerTests(unittest.TestCase):
 
     def test_create_topic(self):
-        with Mock(CreateTopicController('test')) as mock:
+        with Mock(CreateTopicController) as mock:
             mock.save().returns(None).times(1)
 
         mock.save()

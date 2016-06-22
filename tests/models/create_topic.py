@@ -45,4 +45,3 @@ class CreateTopicModelTests(unittest.TestCase):
     def tearDownClass(cls):
         TopicModel.session.close_all()
         Base.metadata.drop_all(engine)
-
