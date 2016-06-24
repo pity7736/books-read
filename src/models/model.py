@@ -33,6 +33,6 @@ class Model:
         return obj
 
     @classmethod
-    def filter(cls, **kwargs):
+    def filter_by(cls, **kwargs):
         objects = cls.session.query(cls).filter_by(**kwargs)
         return objects

@@ -54,32 +54,32 @@ class LookupAuthorTests(unittest.TestCase):
             pass
 
     def test_filter_by_first_name(self):
-        authors = AuthorModel.filter(first_name='first_name2')
+        authors = AuthorModel.filter_by(first_name='first_name2')
 
         self.assertEqual(authors.count(), 2)
         self.assertEqual(authors[0].first_name, 'first_name2')
         self.assertEqual(authors[1].first_name, 'first_name2')
 
     def test_filter_by_wrong_first_name(self):
-        authors = AuthorModel.filter(first_name='test')
+        authors = AuthorModel.filter_by(first_name='test')
 
         self.assertEqual(authors.count(), 0)
 
     def test_filter_by_last_name(self):
-        authors = AuthorModel.filter(last_name='last_name4')
+        authors = AuthorModel.filter_by(last_name='last_name4')
 
         self.assertEqual(authors.count(), 2)
         self.assertEqual(authors[0].last_name, 'last_name4')
         self.assertEqual(authors[1].last_name, 'last_name4')
 
     def test_filter_by_wrong_last_name(self):
-        authors = AuthorModel.filter(last_name='test')
+        authors = AuthorModel.filter_by(last_name='test')
 
         self.assertEqual(authors.count(), 0)
 
     def test_filter_by_wrong_param(self):
         try:
-            AuthorModel.filter(param_fail='test')
+            AuthorModel.filter_by(param_fail='test')
             self.fail('this should fail')
         except InvalidRequestError:
             pass
