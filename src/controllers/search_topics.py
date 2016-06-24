@@ -2,13 +2,12 @@ from ..models.topic import TopicModel
 
 
 class SearchTopicsController:
+    model = TopicModel
 
     def get_by_name(self, name):
-        topic = TopicModel.get(name=name)
+        topic = self.model.get(name=name)
         return topic
 
     def filter_by_name(self, name):
-        topics = TopicModel.session.query(TopicModel).filter(
-            TopicModel.name.like('%{0}%'.format(name))
-        )
+        topics = self.model.filter_by_name(name)
         return topics
