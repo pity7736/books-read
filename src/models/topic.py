@@ -1,8 +1,10 @@
-from .base import Topic
 from .model import Model
 
 
-class TopicModel(Topic, Model):
+class TopicModel(Model):
+
+    def __init__(self, **kwargs):
+        self.name = kwargs.get('name')
 
     def __repr__(self):
         _repr = '<Topic: {0} - {1}>'.format(self.id, self.name)

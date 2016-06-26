@@ -4,16 +4,15 @@ import unittest
 from sqlalchemy.exc import IntegrityError
 from src.models.author import AuthorModel
 
-from src.models.base import Base, engine
-from src.models.book import BookModel
-from src.models.topic import TopicModel
+from src import engine
+from src.models import metadata, BookModel, TopicModel
 
 
 class CreateBookTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        Base.metadata.create_all(engine)
+        metadata.create_all(engine)
         cls.topic = TopicModel(name='software engineering')
 
     def test_save_book(self):
@@ -66,4 +65,4 @@ class CreateBookTests(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         TopicModel.session.close_all()
-        Base.metadata.drop_all(engine)
+        metadata.drop_all(engine)

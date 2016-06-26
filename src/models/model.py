@@ -1,5 +1,4 @@
-from .base import Session
-
+from .. import Session
 
 class Model:
     session = Session()
