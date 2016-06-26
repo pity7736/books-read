@@ -1,8 +1,6 @@
-from sqlalchemy import create_engine, Column, Table
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, sessionmaker, mapper
+from sqlalchemy.orm import relationship, mapper
 from sqlalchemy.sql.functions import func
-from sqlalchemy.sql.schema import ForeignKey, MetaData
+from sqlalchemy.sql.schema import Column, ForeignKey, MetaData, Table
 from sqlalchemy.sql.sqltypes import Integer, Date, DateTime, String
 
 from .topic import TopicModel

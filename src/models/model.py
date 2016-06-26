@@ -25,13 +25,17 @@ class Model:
         except:
             cls.session.rollback()
             raise
+        finally:
+            cls.session.close()
 
     @classmethod
     def get(cls, **kwargs):
         obj = cls.session.query(cls).filter_by(**kwargs).first()
+        cls.session.close()
         return obj
 
     @classmethod
     def filter_by(cls, **kwargs):
         objects = cls.session.query(cls).filter_by(**kwargs)
+        cls.session.close()
         return objects
