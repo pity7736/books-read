@@ -1,6 +1,7 @@
 from .. import Session
 
 class Model:
+    id = None
     session = Session()
 
     @classmethod
