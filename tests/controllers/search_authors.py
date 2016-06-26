@@ -4,7 +4,6 @@ from doublex import Stub, assert_that, is_, ANY_ARG
 from sqlalchemy.orm.query import Query
 
 from src.controllers import SearchAuthorsController
-from src.models import AuthorModel
 
 
 class SearchAuthorsTest(unittest.TestCase):
