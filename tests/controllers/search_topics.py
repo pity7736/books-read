@@ -4,7 +4,7 @@ from doublex import Stub, assert_that, is_, ANY_ARG
 from sqlalchemy.orm.query import Query
 
 from src.controllers import SearchTopicsController
-from src.models.topic import TopicModel
+from src.models import TopicModel
 
 
 class SearchTopicsTest(unittest.TestCase):

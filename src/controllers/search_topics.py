@@ -1,4 +1,4 @@
-from ..models.topic import TopicModel
+from ..models import TopicModel
 
 
 class SearchTopicsController:
