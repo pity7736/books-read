@@ -2,6 +2,7 @@ from .model import Model
 
 
 class TopicModel(Model):
+    name = None
 
     def __init__(self, **kwargs):
         self.name = kwargs.get('name')
@@ -15,4 +16,5 @@ class TopicModel(Model):
         topics = cls.session.query(cls).filter(
             cls.name.like('%{0}%'.format(name))
         )
+        cls.session.close()
         return topics
