@@ -50,11 +50,16 @@ book = Table(
     Column('topic_id', Integer, ForeignKey('topic.id'), nullable=False)
 )
 
-mapper(TopicModel, topic)
+mapper(TopicModel, topic, properties={
+    'books': relationship(BookModel, lazy='dynamic')
+})
 mapper(AuthorModel, author, properties={
-    'books': relationship(BookModel, backref='book', secondary=books_authors)
+    'books': relationship(BookModel, secondary=books_authors, lazy='dynamic')
 })
 mapper(BookModel, book, properties={
     'topic': relationship(TopicModel),
-    'authors': relationship(AuthorModel, secondary=books_authors)
+    'authors': relationship(
+        AuthorModel,
+        secondary=books_authors,
+        lazy='dynamic')
 })

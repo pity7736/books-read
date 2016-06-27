@@ -6,7 +6,7 @@ from src.controllers import SearchBooksController
 from src.models import BookModel
 
 
-class SearchAuthorsTest(unittest.TestCase):
+class SearchAuthorControllerTest(unittest.TestCase):
     # # authors:
     # martin_fowler = AuthorModel(first_name='martin', last_name='fowler'),
     # rober_martin = AuthorModel(first_name='robert', last_name='martin'),

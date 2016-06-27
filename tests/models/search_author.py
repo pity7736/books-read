@@ -6,7 +6,7 @@ from src import engine
 from src.models import metadata, AuthorModel
 
 
-class SearchAuthorTests(unittest.TestCase):
+class SearchAuthorModelTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):

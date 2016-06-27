@@ -4,7 +4,7 @@ from src import engine
 from src.models import metadata, TopicModel
 
 
-class SearchTopicTests(unittest.TestCase):
+class SearchTopicModelTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
