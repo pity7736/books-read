@@ -1,6 +1,5 @@
 import datetime
 import unittest
-import time
 
 from src import engine
 from src.models import metadata, AuthorModel, BookModel, TopicModel

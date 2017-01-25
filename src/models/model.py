@@ -29,7 +29,7 @@ class Model:
 
     @classmethod
     def get(cls, **kwargs):
-        obj = cls.session.query(cls).filter_by(**kwargs).first()
+        obj = cls.filter_by(**kwargs).one()
         return obj
 
     @classmethod

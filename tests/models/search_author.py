@@ -1,6 +1,7 @@
 import unittest
 
 from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.orm.exc import NoResultFound
 
 from src import engine
 from src.models import metadata, AuthorModel
@@ -28,8 +29,11 @@ class SearchAuthorModelTests(unittest.TestCase):
         self.assertEqual(author.last_name, 'fowler')
 
     def test_get_by_nonexistent_id(self):
-        author = AuthorModel.get(id=10)
-        self.assertIsNone(author)
+        try:
+            AuthorModel.get(id=10)
+            self.fail('this should fail')
+        except NoResultFound:
+            pass
 
     def test_get_by_first_name(self):
         author = AuthorModel.get(first_name='robert')
