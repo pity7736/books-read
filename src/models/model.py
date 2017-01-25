@@ -36,3 +36,8 @@ class Model:
     def filter_by(cls, **kwargs):
         objects = cls.session.query(cls).filter_by(**kwargs)
         return objects
+
+    @classmethod
+    def get_all(cls):
+        objects = cls.session.query(cls).all()
+        return objects

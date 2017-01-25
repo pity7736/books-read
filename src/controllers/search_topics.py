@@ -11,3 +11,7 @@ class SearchTopicsController:
     def filter_by_name(self, name):
         topics = self.model.filter_by_name(name)
         return topics
+
+    def get_all(self):
+        topics = self.model.get_all()
+        return topics
