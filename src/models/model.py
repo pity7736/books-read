@@ -39,5 +39,5 @@ class Model:
 
     @classmethod
     def get_all(cls):
-        objects = cls.session.query(cls).all()
+        objects = cls.session.query(cls)
         return objects
