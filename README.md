@@ -9,7 +9,7 @@
   + Doublex
 
 ## Install requirements
-  pip install -r requirements.txt
+  pip3 install -r requirements.txt
 
 ## License
 Show [license](https://github.com/pity7736/books_read/blob/master/LICENSE)
