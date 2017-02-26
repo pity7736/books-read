@@ -1,13 +1,7 @@
 # pycharm files
 .idea/
 
-# pycache
-src/__pycache__/
-src/models/__pycache__/
-tests/__pycache__/
-tests/models/__pycache__/
-tests/controllers/__pycache__/
-src/controllers/__pycache__/
+*.pyc
 
 # local settings
 src/local_settings.py
